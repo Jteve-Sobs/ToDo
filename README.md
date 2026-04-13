@@ -35,7 +35,7 @@ http://localhost:3000/
 
 ## Geplante Features
 
-- [ ] Tasks als erledigt marlieren  
+- [ ] Tasks als erledigt markieren  
 Eine Checkbox, die den Status anzeigt  
 API Endpunkt: PATCH /api/tasks/:id  
 
