@@ -7,7 +7,18 @@ async function loadTasks() {
 
   tasks.forEach(task => {
     const li = document.createElement("li");
-    li.textContent = task.title;
+    if (task.done == true) {
+      li.textContent += "✅ ";
+    }
+    li.textContent += task.title;
+    const button = document.createElement("button")
+    button.textContent = "Erledigt"
+    button.classList.add("item")
+    button.addEventListener("click", function() {
+       markTaskAsComplete(task.id);
+       loadTasks();
+      } );
+    li.appendChild(button);
     list.appendChild(li);
   });
 }
@@ -29,4 +40,16 @@ async function addTask() {
   loadTasks();
 }
 
+async function markTaskAsComplete(id) {
+  console.log("ID")
+  console.log(id)
+  await fetch("/api/tasks/" + id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+  });
+}
+
 loadTasks();
+markTaskAsComplete(1);
